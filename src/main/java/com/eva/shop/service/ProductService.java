@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -24,7 +23,7 @@ public class ProductService {
     }
 
     public List<Product> getAllNotEqualRegex(@PathVariable String nameFilter) {
-        List<Product> filteredProducts = new ArrayList<>();
+        List<Product> filteredProducts;
 
         try {
             List<Product> allProducts = productRepository.findAll();
@@ -32,9 +31,11 @@ public class ProductService {
             filteredProducts = allProducts
                     .stream()
                     .filter(product -> !Pattern.matches(nameFilter, product.getName())).collect(Collectors.toList());
+
         } catch (PatternSyntaxException | NullPointerException e) {
             throw new ValidationException("RegEx is not valid");
         }
+
         return filteredProducts;
     }
 }

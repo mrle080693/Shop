@@ -33,7 +33,7 @@ public class Product {
         this.description = description;
     }
 
-    public Product(@NotNull long id ,@NotNull @Min(1) @Max(100) String name, @NotNull @Min(1) @Max(1000) String description) {
+    public Product(@NotNull long id, @NotNull @Min(1) @Max(100) String name, @NotNull @Min(1) @Max(1000) String description) {
         this.id = id;
         this.name = name;
         this.description = description;
