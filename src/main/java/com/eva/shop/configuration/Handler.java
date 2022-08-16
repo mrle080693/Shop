@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 public class Handler {
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<Object> handle(Exception ex,
+    public ResponseEntity<Object> handle(ValidationException ex,
                                          HttpServletRequest request, HttpServletResponse response) {
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ex.getValidationExceptionMessage() ,HttpStatus.BAD_REQUEST);
     }
 }
