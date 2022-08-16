@@ -32,7 +32,7 @@ public class ProductService {
             filteredProducts = allProducts
                     .stream()
                     .filter(product -> !Pattern.matches(nameFilter, product.getName())).collect(Collectors.toList());
-        } catch (PatternSyntaxException e) {
+        } catch (PatternSyntaxException | NullPointerException e) {
             throw new ValidationException("RegEx is not valid");
         }
         return filteredProducts;

@@ -53,4 +53,20 @@ class ProductControllerTest {
 
         Assertions.assertThrows(ValidationException.class, () -> productController.getAllNotEqualRegex("{}"));
     }
+
+    @Test
+    void getAllNotEqualRegex_ShouldReturnValidationException_WhenInputIsNull() {
+        List<Product> mockedProductRepositoryReturns;
+        Product productOne = new Product(1, "ProductOne", "Very special thing");
+        Product productTwo = new Product(1, "ProductTwo", "Very special thing");
+
+        mockedProductRepositoryReturns = new ArrayList<>();
+        mockedProductRepositoryReturns.add(productOne);
+        mockedProductRepositoryReturns.add(productTwo);
+
+        Mockito.when(mockedProductService.getAllNotEqualRegex(null))
+                .thenThrow(ValidationException.class);
+
+        Assertions.assertThrows(ValidationException.class, () -> productController.getAllNotEqualRegex(null));
+    }
 }
